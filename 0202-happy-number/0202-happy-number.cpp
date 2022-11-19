@@ -1,38 +1,20 @@
 class Solution {
 public:
-    typedef long long ll;
-    map<ll, ll> mp;
     bool isHappy(int n) {
-        bool ok = true;
-        
-    while (n != 1) {
-        n = getSum(n);
-        if(mp[n] > 1) {
-            ok = false;
-            break;
+        int sum = 0;
+     
+        while(n) {
+            int r = n % 10;
+            sum += pow(r,2);
+            n /= 10;
         }
-    }
-    return (ok ? true : false);
-    }
+     
+        if(sum == 1) return true; 
     
-    ll fastpower(ll n, ll m) {
-    ll res = 1;
-    while (m > 0) {
-        if (m & 1)res = res * n;
-        n *= n;
-        m /= 2;
+        else if(sum < 7) return false; 
+        
+        else return isHappy(sum);
+
     }
-    return res;
-}
-    
-    ll getSum(ll num) {
-    ll sum = 0;
-    while (num) {
-        sum += fastpower((num % 10), 2);
-        num /= 10;
-    }
-    mp[sum]++;
-    return sum;
-}
     
 };
